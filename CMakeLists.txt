@@ -1,11 +1,9 @@
 cmake_minimum_required(VERSION 3.21)
+project(GPU_handle LANGUAGES CXX CUDA)
 set(CMAKE_CUDA_COMPILER /tempo/cuda/bin/nvcc)
 set(CUDAToolkit_ROOT /tempo/cuda/bin)
 project(GPU_handle CUDA)
-
 set(CMAKE_CUDA_STANDARD 14)
-
 add_executable(GPU_handle main.cu)
-
-set_target_properties(GPU_handle PROPERTIES
-        CUDA_SEPARABLE_COMPILATION ON)
+target_compile_features(GPU_handle PUBLIC cxx_std_11)
+set_target_properties(GPU_handle PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
