@@ -7,9 +7,9 @@
 #define MAX_NBR_FACETS 252
 #define NBR_RIDGES 2688
 #define NBR_FACETS 840
-#define NBR_X0 1771561
+#define NBR_X0 161051 //out of 1771561
 #define NBR_X1 198414832
-#define NBR_LOOPS 121
+#define NBR_LOOPS 1 //out of 121
 #define RESULT_SIZE (1ul<<20)
 
 using namespace std;
@@ -50,8 +50,9 @@ __global__ void kernel(StructX0 structX0[]) {
         }
     }
     bool Ax[4];
-    bool stop=false;
+    bool stop;
     for (unsigned int X1: X1_device) {
+        stop = false;
         if (threadIdx.x==0) {
             memset(r,0,sizeof(r));
         }
@@ -63,7 +64,7 @@ __global__ void kernel(StructX0 structX0[]) {
         for (bool j: Ax) {
             count += __syncthreads_count(j);
         }
-        if (count > MAX_NBR_FACETS) continue;
+        if (count > MAX_NBR_FACETS) stop=true;
         for (int j=0;j<4;j++) {
             if (stop) continue;
             if (Ax[j]) {
@@ -165,10 +166,6 @@ int main() {
         if (cudaerr != cudaSuccess)
             printf("kernel launch failed with error \"%s\".\n",
                    cudaGetErrorString(cudaerr));
-        for(int s=0;s<sizeVectX0;s++){
-            cout<<vectX0[s]<<',';
-        }
-        cout<<'\n';
     }
     cudaMemcpyFromSymbol(&n_out_host, n_out_device, sizeof(n_out_device));
     cudaMemcpyFromSymbol(&out_host, out_device, sizeof(out_device));
