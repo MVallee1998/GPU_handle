@@ -2,18 +2,18 @@
 #include <bit>
 #include <bitset>
 #include <cstdint>
-#include "Data_10_14_2.cpp"
+#include "Data_9_13_6.cpp"
 
-#define NBR_RIDGES 1848 //first multiple of 154 larger than 1792
+#define NBR_RIDGES 1210 //first multiple of 110 larger than 1190
 #define NBR_LOOPS 121 //out of 1
 #define RESULT_SIZE (1u<<25)
-#define BLOCK_SIZE 154
+#define BLOCK_SIZE 110
 
 using namespace std;
 
 struct StructX0 {
     unsigned long X0 = 0ul;
-    unsigned int precalc[20] = {0u};
+    unsigned int precalc[14] = {0u};
 };
 const int nbrX0 = NBR_X0;
 const int nbrX1 = NBR_X1;
