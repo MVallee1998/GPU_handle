@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=GPU_test
+#SBATCH --job-name=9_13_4
 #SBATCH --gres=gpu:1
 #SBATCH --qos=qos_gpu-t4
 #SBATCH --cpus-per-task=5
