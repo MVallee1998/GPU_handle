@@ -1,13 +1,13 @@
 #include <iostream>
 #include <bit>
 #include <bitset>
-#include "Data_10_14_0.cpp"
+#include "Data_10_14_2.cpp"
 
 #define NBR_RIDGES 1848 //first multiple of 154 larger than 1792
-#define NBR_LOOPS 1 //out of 1
+#define NBR_LOOPS 121 //out of 1
 #define RESULT_SIZE (1u<<25)
-#define BLOCK_SIZE 77
-#define SUB_BLOCK 8
+#define BLOCK_SIZE 154
+#define SUB_BLOCK 4
 #define DIVISOR (32/SUB_BLOCK)
 using namespace std;
 
@@ -157,7 +157,7 @@ int main() {
         if (cudaerr != cudaSuccess)
             printf("kernel launch failed with error \"%s\".\n",
                    cudaGetErrorString(cudaerr));
-        if (nOut > (1u << 23)) {
+        if (nOut > (1u << 22)) {
             for (int i = 0; i < nOut; i++) {
                 first_appeared = false;
                 cout << '[';

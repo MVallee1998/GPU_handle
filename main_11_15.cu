@@ -3,12 +3,14 @@
 #include <bitset>
 #include "Data_11_15_0.cpp"
 
-#define NBR_RIDGES 2730 //first multiple of 210 larger than 2688
+#define NBR_GPU 1
+#define NBR_RIDGES 3360 //first multiple of BLOCK_SIZE larger than 2688
 #define NBR_LOOPS 1 //out of 121
-#define RESULT_SIZE (1u<<22)
-#define BLOCK_SIZE 210
-#define SUB_BLOCK 4
+#define RESULT_SIZE (1u<<25)
+#define BLOCK_SIZE 840
+#define SUB_BLOCK 1
 #define DIVISOR (32/SUB_BLOCK)
+#define NBR_CUDA_CORES 1024
 
 using namespace std;
 
@@ -25,6 +27,7 @@ __device__ __managed__  unsigned int listX1[nbrX1];
 __device__ __managed__  unsigned long out[RESULT_SIZE];
 __device__ __managed__  int nOut = 0;
 __device__ __managed__  StructX0 listX0[nbrX0];
+__device__ __managed__  StructX0 listX0i[NBR_GPU][(nbrX0 / NBR_GPU) + NBR_GPU];
 
 __global__ void kernel(StructX0 structX0[]) {
     unsigned int a[SUB_BLOCK];
@@ -153,12 +156,22 @@ int main() {
                 }
             }
         }
-        kernel<<<NBR_X0, BLOCK_SIZE>>>(listX0);
-        cudaError_t cudaerr = cudaDeviceSynchronize();
-        if (cudaerr != cudaSuccess)
-            printf("kernel launch failed with error \"%s\".\n",
-                   cudaGetErrorString(cudaerr));
-        if (nOut > (1u << 23)) {
+        for(int k=0;k<nbrX0;k++){
+            listX0i[k%NBR_GPU][k/NBR_GPU].X0 = listX0[k].X0;
+            for(int j=0;j<27;j++) listX0i[k%NBR_GPU][k/NBR_GPU].precalc[j] = listX0[k].precalc[j];
+        }
+        for(int i=0;i<NBR_GPU;i++) {
+            cudaSetDevice(i);
+            kernel<<<NBR_CUDA_CORES, BLOCK_SIZE>>>(listX0i[i]);
+        }
+        for(int i=0;i<NBR_GPU;i++) {
+            cudaSetDevice(i);
+            cudaError_t cudaerr = cudaDeviceSynchronize();
+            if (cudaerr != cudaSuccess)
+                printf("kernel launch failed with error \"%s\".\n",
+                       cudaGetErrorString(cudaerr));
+        }
+        if (nOut > (1u << 22)) {
             for (int i = 0; i < nOut; i++) {
                 first_appeared = false;
                 cout << '[';
