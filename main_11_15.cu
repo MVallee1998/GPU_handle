@@ -10,7 +10,7 @@
 #define BLOCK_SIZE 840
 #define SUB_BLOCK 1
 #define DIVISOR (32/SUB_BLOCK)
-#define NBR_CUDA_CORES 1024
+#define NBR_CUDA_CORES 128
 
 using namespace std;
 
@@ -36,12 +36,12 @@ __global__ void kernel(StructX0 structX0[]) {
     for (int k = 0; k < SUB_BLOCK; k++) {
         a[k] = ai[k][threadIdx.x] | (((precalc_a >> (SUB_BLOCK * (threadIdx.x % DIVISOR) + k)) & 1u) << 31);
     }
-    int m[SUB_BLOCK][N];
-    for (int k = 0; k < SUB_BLOCK; k++) {
-        for (int l = 0; l < N; l++) {
-            m[k][l] = mi[k][l][threadIdx.x];
-        }
-    }
+//    int m[SUB_BLOCK][N];
+//    for (int k = 0; k < SUB_BLOCK; k++) {
+//        for (int l = 0; l < N; l++) {
+//            m[k][l] = mi[k][l][threadIdx.x];
+//        }
+//    }
     int count;
     bool Ax[SUB_BLOCK];
     bool stop;
@@ -52,26 +52,26 @@ __global__ void kernel(StructX0 structX0[]) {
         for (int j = 0; j < SUB_BLOCK; j++) {
             Ax[j] = __popc(a[j] & X1) & 1;
         }
-        count = 0;
-        for (bool j: Ax) {
-            count += __syncthreads_count(j);
-        }
-        if (count > MAX_NBR_FACETS) continue;
-        for (int k = 0; k < SUB_BLOCK; k++) {
-            if (stop) break;
-            if (Ax[k]) {
-                for (int t = 0; t < N; t++) {
-                    if (atomicAdd(r + m[k][t], 1) >= 2) {
-                        stop = true;
-                        break;
-                    }
-                }
-            }
-        }
+//        count = 0;
+//        for (bool j: Ax) {
+//            count += __syncthreads_count(j);
+//        }
+//        if (count > MAX_NBR_FACETS) continue;
+//        for (int k = 0; k < SUB_BLOCK; k++) {
+//            if (stop) break;
+//            if (Ax[k]) {
+//                for (int t = 0; t < N; t++) {
+//                    if (atomicAdd(r + m[k][t], 1) >= 2) {
+//                        stop = true;
+//                        break;
+//                    }
+//                }
+//            }
+//        }
         if (__syncthreads_or(stop)) continue;
-        if (threadIdx.x == 0) {
-            out[atomicAdd(&nOut, 1)] = (X0 | (unsigned long) (X1 ^ (1u << 31)));
-        }
+//        if (threadIdx.x == 0) {
+//            out[atomicAdd(&nOut, 1)] = (X0 | (unsigned long) (X1 ^ (1u << 31)));
+//        }
     }
 
 }
