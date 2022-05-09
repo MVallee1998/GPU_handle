@@ -1,7 +1,7 @@
 #define N 10
 #define NBR_FACETS 616
 #define NBR_GENERATORS 56
-#define NBR_X0 1771561
+#define NBR_X0 1331 /*1771561*/
 #define NBR_X1 2087008
 #define NBR_GROUPS 19
 #define MAX_NBR_FACETS 196

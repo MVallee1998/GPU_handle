@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bit>
 #include <bitset>
-#include "Data_9_13_6.cpp"
+#include "Data/Data_9_13_6.cpp"
 
 #define NBR_RIDGES 1210 //first multiple of 220 larger than 1190
 #define NBR_LOOPS 121 //out of 121

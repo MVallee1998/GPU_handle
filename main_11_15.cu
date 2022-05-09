@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bit>
 #include <bitset>
-#include "Data_11_15_0.cpp"
+#include "Data/Data_11_15_0.cpp"
 
 #define NBR_GPU 1
 #define NBR_RIDGES 3360 //first multiple of BLOCK_SIZE larger than 2688
