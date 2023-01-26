@@ -14,4 +14,5 @@ This GPU algorithm was implemented for NVIDIA® graphic cards only.
 The installation information can be found on the official [NVIDIA website](https://developer.nvidia.com/cuda-toolkit). 
 ## Compiling the CUDA® algorithm
 An example is better than a thousand words:
-'/usr/local/cuda-12.0/bin/nvcc main_8_12.cu -arch=sm_86 -o 8_12_test'
+```bash
+/usr/local/cuda-12.0/bin/nvcc main_8_12.cu -arch=sm_86 -o 8_12_test```
