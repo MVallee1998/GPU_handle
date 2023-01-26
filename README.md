@@ -3,7 +3,7 @@ This project contains the CUDA and C++ implementations of "Algorithm 1" in [arxi
 # Abstract
 We provide a GPU-friendly algorithm for obtaining all weak pseudo-manifolds whose facets are all in an input set of facets satisfying given conditions. We use it here to completely list up toric colorable seed PL-spheres with a few vertices implying the complete characterization of PL-spheres of dimension n−1 with n+4 vertices having maximal Buchstaber numbers.
 # Content
-The [Data](./Data) folder gathers the input facets for all the necessary dimensions n-1, one for each IDCM orbit.
+The [Data](./Data) folder gathers the input facets for all the necessary dimensions n-1, one for each IDCM orbit. This data was computed using python, since it does not require much computing power.
 
 The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each IDCM orbit and each dimension n-1. Note the changes in the values of aliases (number of active threads, etc...) which changes according to each IDCM orbit for the best suitability to the GPU.
 
@@ -31,3 +31,7 @@ For compiling, for example launch:
 gpp ./cpp/main_8_12.cpp -o ./build/CPU_exec_8_12
 ```
 For running it, is suffices to launch the executable ``./build/CPU_exec_8_12`` in the terminal.
+
+# What to do with the output of the algorithm ?
+The algorithm outputs all weak pseudo manifolds having their facets in a given set and satisfying the g-conjecture. These simplicial complexes are pure and encoded as the list of their maximal faces in a binary form.
+for example the simplicial complex ``[3,5,6]`` represents the simplicial complex whose maximal faces are ``[[1,2],[1,3],[2,3]]``, it is the boundary of a 2-simplex having vertices ``1,2,3``. 
