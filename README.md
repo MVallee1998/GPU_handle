@@ -5,7 +5,7 @@ We provide a GPU-friendly algorithm for obtaining all weak pseudo-manifolds whos
 # Content
 The [Data](./Data) folder gathers the input facets for all the necessary dimensions n-1, one for each IDCM orbit. This data was computed using python, since it does not require much computing power.
 
-The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each IDCM orbit and each dimension n-1. Note the changes in the values of aliases (number of active threads, etc...) which changes according to each IDCM orbit for the best suitability to the GPU.
+The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each dimension n-1. Note the changes in the values of aliases (number of active threads, etc...) which changes according to each IDCM orbit for the best suitability to the GPU. Remember to change the data file you are using as an input in the appropriate ``*.cu`` script at line 5.
 
 The [C++](./cpp) folder contains the CPU version of the GPU algorithm which was used for comparing the output with the GPU algorithm.
 # How to compile and run the algorithm?
@@ -22,18 +22,18 @@ will compile the cuda script ``main_8_12.c`` into the executable ``GPU_exec_8_12
 where:
 - ``/usr/local/cuda-12.0/bin/nvcc`` is the path to the CUDA Toolkit ``nvcc`` compiler installed beforehand.
 - ``./cuda/main_8_12.cu`` is the CUDA script we want to compile and ``-o ./build/GPU_exec_8_12`` is the argument for specifying the output executable.
-- ``-arch=sm_86`` is the argument for specifying the architecture of the graphic card used for running the algorithm find yours [here](https://developer.nvidia.com/cuda-gpus).
+- ``-arch=sm_86`` is the argument for specifying the architecture of the graphic card used for running the algorithm, find yours [here](https://developer.nvidia.com/cuda-gpus).
 
-For running it, is suffices to launch the executable ``./build/GPU_exec_8_12`` in the terminal with an output parsing to a file(e.g. ``./build/GPU_exec_8_12 >> ./outputs/output_8_12.txt``).
+For running it, it suffices to launch the executable ``./build/GPU_exec_8_12`` in the terminal with an output parsing to a file(e.g. ``./build/GPU_exec_8_12 >> ./outputs/output_8_12.txt``).
 ### Compiling the C++ algorithm
 For compiling, for example launch:
 ```bash
 gpp ./cpp/main_8_12.cpp -o ./build/CPU_exec_8_12
 ```
-For running it, is suffices to launch the executable ``./build/CPU_exec_8_12`` in the terminal.
+For running it, it suffices to launch the executable ``./build/CPU_exec_8_12`` in the terminal.
 
 # What to do with the output of the algorithm ?
-The algorithm outputs all weak pseudo manifolds having their facets in a given set and satisfying the g-conjecture.
+The algorithm outputs all weak pseudo manifolds having their facets in a given set and satisfying the upper bound conjecture.
 These simplicial complexes are pure and encoded as the list of their facets in a binary form.
 For example the binary array ``[3,5,6]`` represents the simplicial complex whose facets are ``[[1,2],[1,3],[2,3]]``, it is the boundary of a 2-simplex having vertices ``1,2,3``.
 See the aforementioned article for what is left to perform in order to obtain the complete list of seed PL-spheres of Picard number 4 having maximal Buchstaber number. 
