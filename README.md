@@ -18,7 +18,7 @@ An example is better than a thousand words, if launched from the root folder of 
 ```bash
 /usr/local/cuda-12.0/bin/nvcc ./cuda/main_8_12.cu -arch=sm_86 -o ./build/GPU_exec_8_12
 ```
-will compile the cuda script ``main_8_12.c`` into the executable ``GPU_exec_8_12``,
+will compile the cuda script ``main_8_12.cu`` into the executable ``GPU_exec_8_12``,
 where:
 - ``/usr/local/cuda-12.0/bin/nvcc`` is the path to the CUDA Toolkit ``nvcc`` compiler installed beforehand.
 - ``./cuda/main_8_12.cu`` is the CUDA script we want to compile and ``-o ./build/GPU_exec_8_12`` is the argument for specifying the output executable.
