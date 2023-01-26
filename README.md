@@ -9,18 +9,18 @@ The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each IDC
 
 The [C++](./cpp) folder contains the CPU version of the GPU algorithm which was used for comparing the output with the GPU algorithm.
 # How to compile and run the algorithm?
-## Installing NVIDIA® CUDA® Toolkit
+### Installing NVIDIA® CUDA® Toolkit
 This GPU algorithm was implemented for NVIDIA® graphic cards only.
 The installation information can be found on the official [NVIDIA website](https://developer.nvidia.com/cuda-toolkit).
 We however advise the users to use Linux for compiling and running the algorithm.
-## Compiling the CUDA® algorithm
+### Compiling the CUDA® algorithm
 An example is better than a thousand words, if launched from the root folder of the project, the following command
 ```bash
 /usr/local/cuda-12.0/bin/nvcc ./cuda/main_8_12.cu -arch=sm_86 -o ./build/GPU_exec_8_12
 ```
 will compile the cuda script ``main_8_12.c`` into the executable ``GPU_exec_8_12``,
 where:
-- ``/usr/local/cuda-12.0/bin/nvcc`` is the path to the CUDA Toolkit ``nvcc`` compiler
-- ``./cuda/main_8_12.cu`` is the CUDA script we want to compile and ``-o ./build/GPU_exec_8_12`` is the argument for specifying the output executable
--  ``-arch=sm_86`` represents the architecture of the graphic card used.
-For 
+- ``/usr/local/cuda-12.0/bin/nvcc`` is the path to the CUDA Toolkit ``nvcc`` compiler installed beforehand.
+- ``./cuda/main_8_12.cu`` is the CUDA script we want to compile and ``-o ./build/GPU_exec_8_12`` is the argument for specifying the output executable.
+- ``-arch=sm_86`` is the argument for specifying the architecture of the graphic card used for running the algorithm find yours [here](https://developer.nvidia.com/cuda-gpus).
+
