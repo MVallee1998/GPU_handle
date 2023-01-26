@@ -5,6 +5,8 @@
 #include <string>
 #include <algorithm>
 #include <iostream>
+#include <omp.h>
+
 using namespace std;
 
 #define NBR_RIDGES 708
@@ -76,6 +78,7 @@ int main() {
     bool skip;
     unsigned long X0_val;
     unsigned int a[NBR_FACETS];
+
     for (int l = 0; l < NBR_LOOPS; l++) {
         for (auto &dataX0: listX0) {
             for (unsigned int &dataPrecalc: dataX0.precalc) {
@@ -97,6 +100,7 @@ int main() {
                 }
             }
         }
+        #pragma omp parallel for shared(listX0,M,a) private(X0_val,Ax,r,count,skip,first_appeared,F)
         for (auto & dataX0: listX0) {
             for (int j = 0; j < NBR_FACETS; j++) a[j] = ((A[j] << 33) >> 33)| (((dataX0.precalc[j/DIVISOR] >> (j % DIVISOR)) & 1u) << 31);
             X0_val = dataX0.X0;

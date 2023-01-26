@@ -20,7 +20,7 @@ struct StructX0 {
 
 const int nbrX0 = NBR_X0;
 const int nbrX1 = NBR_X1;
-__shared__ int r[NBR_RIDGES];
+__shared__ unsigned int r[NBR_RIDGES];
 __device__ __managed__  unsigned int ai[SUB_BLOCK][BLOCK_SIZE];
 __device__ __managed__  int mi[SUB_BLOCK][N][BLOCK_SIZE];
 __device__ __managed__  unsigned int listX1[nbrX1];
