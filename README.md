@@ -12,8 +12,8 @@ The [C++](./cpp) folder contains the CPU version of the GPU algorithm which was 
 ### Installing NVIDIA® CUDA® Toolkit
 This GPU algorithm was implemented for NVIDIA® graphic cards only.
 The installation information can be found on the official [NVIDIA website](https://developer.nvidia.com/cuda-toolkit).
-We however advise the users to use Linux for compiling and running the algorithm.
-### Compiling the CUDA® algorithm
+We strongly advise the interested reader to use Linux for compiling and running the algorithm.
+### Compiling and running the CUDA® algorithm
 An example is better than a thousand words, if launched from the root folder of the project, the following command
 ```bash
 /usr/local/cuda-12.0/bin/nvcc ./cuda/main_8_12.cu -arch=sm_86 -o ./build/GPU_exec_8_12
@@ -24,3 +24,10 @@ where:
 - ``./cuda/main_8_12.cu`` is the CUDA script we want to compile and ``-o ./build/GPU_exec_8_12`` is the argument for specifying the output executable.
 - ``-arch=sm_86`` is the argument for specifying the architecture of the graphic card used for running the algorithm find yours [here](https://developer.nvidia.com/cuda-gpus).
 
+For running it, is suffices to launch the executable ``./build/GPU_exec_8_12`` in the terminal.
+### Compiling the C++ algorithm
+For compiling, for example launch:
+```bash
+gpp ./cpp/main_8_12.cpp -o ./build/CPU_exec_8_12
+```
+For running it, is suffices to launch the executable ``./build/CPU_exec_8_12`` in the terminal.
