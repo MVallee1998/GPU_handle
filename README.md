@@ -15,4 +15,5 @@ The installation information can be found on the official [NVIDIA website](https
 ## Compiling the CUDA® algorithm
 An example is better than a thousand words:
 ```bash
-/usr/local/cuda-12.0/bin/nvcc main_8_12.cu -arch=sm_86 -o 8_12_test```
+/usr/local/cuda-12.0/bin/nvcc main_8_12.cu -arch=sm_86 -o 8_12_test
+```
