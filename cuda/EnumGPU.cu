@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bit>
 #include <bitset>
+// Compile this script to test if you have correctly installed CUDA Toolkit
 int main(){
     int deviceCount;
     cudaGetDeviceCount(&deviceCount);
