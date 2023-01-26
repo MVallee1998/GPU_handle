@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bit>
 #include <cstring>
-#include "Data/Data_10_14_2.cpp"
+#include "../Data/Data_10_14_2.cpp"
 
 using namespace std;
 

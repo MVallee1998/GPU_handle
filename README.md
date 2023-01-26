@@ -5,3 +5,5 @@ We provide a GPU-friendly algorithm for obtaining all weak pseudo-manifolds whos
 # Content
 The ./Data folder gathers the input facets for all the necessary dimensions n-1, one for each IDCM orbit.
 
+the ./cuda
+# 
