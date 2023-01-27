@@ -37,3 +37,18 @@ The algorithm outputs all weak pseudo manifolds having their facets in a given s
 These simplicial complexes are pure and encoded as the list of their facets in a binary form.
 For example the binary array ``[3,5,6]`` represents the simplicial complex whose facets are ``[[1,2],[1,3],[2,3]]``, it is the boundary of a 2-simplex having vertices ``1,2,3``.
 See the aforementioned article for what is left to perform in order to obtain the complete list of seed PL-spheres of Picard number 4 having maximal Buchstaber number. 
+
+# The results obtained with this algorithm
+Find in the [Results](./Results) folder the complete database (up to simplicial isomorphisms) of Seed PL-spheres of Picard number ``p`` smaller or equal to four having maximal Buchstaber number.
+The name format of the files is ``CSPLS_n_m`` where ``n-1`` represents the dimension and ``m`` the number of vertices, the letters ``CSPLS`` stand for _Colorizable Seed PL-Spheres_. 
+Once more, these text files store the PL-spheres as the array of the binary representation of their facets.
+Their quantity is as follows:
+
+| p\n | 1 | 2 | 3   | 4    | 5     | 6   | 7    | 8   | 9   | 10 | 11 | >11 | total  |
+|------------------|---|---|-----|------|-------|-------|--------|-------|-------|------|-----|-------|--------|
+| 1              | 1 |   |     |      |       |       |        |       |       |      |     |       | 1      |
+| $2$              |   | $1$ |     |      |       |       |        |       |       |      |     |       | 1    |
+| $3$              |   | 1 | 1 | 1    |       |       |        |       |       |      |     |       | 3    |
+| $4$              |   | 1 | 4 | 20+1 | 142 | 733 | 1190 | 776 | 243 | 39 | 4 |       | 3141 |
+
+Notice the ``+1`` for ``n=4,m=8`` which is not in the file [CSPLS_4_8](./Results/CSPLS_4_8) and which represents a product of simplices.
