@@ -46,7 +46,7 @@ The name format of the files is ``CSPLS_n_m`` where $n-1$ represents the dimensi
 Once more, these text files store the PL-spheres as the array of the binary representation of their facets.
 Their quantity is as follows:
 
-| p⟍n | 1 | 2 | 3   | 4    | 5     | 6   | 7    | 8   | 9   | 10 | 11 | >11 | total  |
+| p⟍n | 1 | 2 | 3   | 4    | 5     | 6   | 7    | 8   | 9   | 10 | 11 | $>11$ | total  |
 |--------|---|---|-----|------|-------|-------|--------|-------|-------|------|-----|-------|--------|
 | 1      | 1 |   |     |      |       |       |        |       |       |      |     |       | 1      |
 | 2      |   | 1 |     |      |       |       |        |       |       |      |     |       | 1    |
