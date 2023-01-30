@@ -1,11 +1,11 @@
 # Presentation
 This project contains the CUDA and C++ implementations of **Algorithm 1** in [arxiv:2301.00806](https://arxiv.org/abs/2301.00806) for enumerating PL-spheres of Picard number four having maximal Buchstaber number.
 # Abstract
-We provide a GPU-friendly algorithm for obtaining all weak pseudo-manifolds whose facets are all in an input set of facets satisfying given conditions. We use it here to completely list up toric colorable seed PL-spheres with a few vertices implying the complete characterization of PL-spheres of dimension n−1 with n+4 vertices having maximal Buchstaber numbers.
+We provide a GPU-friendly algorithm for obtaining all weak pseudo-manifolds whose facets are all in an input set of facets satisfying given conditions. We use it here to completely list up toric colorable seed PL-spheres with a few vertices implying the complete characterization of PL-spheres of dimension $n−1$ with $n+4$ vertices having maximal Buchstaber numbers.
 # Content
-The [Data](./Data) folder gathers the input facets for all the necessary dimensions n-1, one for each IDCM orbit. This data was computed using python, since it does not require much computing power.
+The [Data](./Data) folder gathers the input facets for all the necessary dimensions $n-1$, one for each IDCM orbit. This data was computed using python, since it does not require much computing power.
 
-The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each dimension n-1. Note the changes in the values of aliases (number of active threads, etc...) which changes according to each IDCM orbit for the best suitability to the GPU. 
+The [cuda](./cuda) folder gathers the GPU algorithms, with one file for each dimension $n-1$. Note the changes in the values of aliases (number of active threads, etc...) which changes according to each IDCM orbit for the best suitability to the GPU. 
 
 The [C++](./cpp) folder contains the CPU version of the GPU algorithm which was used for comparing the output with the GPU algorithm.
 
@@ -41,16 +41,16 @@ For example the binary array ``[3,5,6]`` represents the simplicial complex whose
 See the aforementioned article for what is left to perform in order to obtain the complete list of seed PL-spheres of Picard number 4 having maximal Buchstaber number. 
 
 # The results obtained with this algorithm
-Find in the [Results](./Results) folder the complete database (up to simplicial isomorphisms) of Seed PL-spheres of Picard number ``p`` smaller or equal to four having maximal Buchstaber number.
-The name format of the files is ``CSPLS_n_m`` where $n-1$ represents the dimension and ``m`` the number of vertices, the letters ``CSPLS`` stand for _Colorizable Seed PL-Spheres_. 
+Find in the [Results](./Results) folder the complete database (up to simplicial isomorphisms) of Seed PL-spheres of Picard number $p$ smaller or equal to four having maximal Buchstaber number.
+The name format of the files is ``CSPLS_n_m`` where $n-1$ represents the dimension and $m$ the number of vertices, the letters ``CSPLS`` stand for _Colorizable Seed PL-Spheres_. 
 Once more, these text files store the PL-spheres as the array of the binary representation of their facets.
 Their quantity is as follows:
 
-| p⟍n | 1 | 2 | 3   | 4    | 5     | 6   | 7    | 8   | 9   | 10 | 11 | $>11$ | total  |
-|--------|---|---|-----|------|-------|-------|--------|-------|-------|------|-----|-------|--------|
-| 1      | 1 |   |     |      |       |       |        |       |       |      |     |       | 1      |
-| 2      |   | 1 |     |      |       |       |        |       |       |      |     |       | 1    |
-| 3      |   | 1 | 1 | 1    |       |       |        |       |       |      |     |       | 3    |
-| 4      |   | 1 | 4 | 20+1 | 142 | 733 | 1190 | 776 | 243 | 39 | 4 |       | 3141 |
+| $p$⟍$n$ | $1$ | $2$ | $3$ | $4$  | $5$ | $6$ | $7$  | $8$ | $9$ | $10$ | $11$ | $>11$ | total  |
+|---------|-----|-----|-----|------|-----|-----|------|-----|-----|------|------|-------|--------|
+| $1$     | 1   |     |     |      |     |     |      |     |     |      |      |       | 1      |
+| $2$     |     | 1   |     |      |     |     |      |     |     |      |      |       | 1    |
+| $3$     |     | 1   | 1   | 1    |     |     |      |     |     |      |      |       | 3    |
+| $4$     |     | 1   | 4   | 20+1 | 142 | 733 | 1190 | 776 | 243 | 39   | 4    |       | 3141 |
 
-Notice the ``+1`` for ``n=4,m=8`` which is not in the file [CSPLS_4_8](./Results/CSPLS_4_8) and which represents a product of simplices.
+Notice the $+1$ for $p=4,m=8$ which is not in the file [CSPLS_4_8](./Results/CSPLS_4_8) and which represents a product of simplices.
