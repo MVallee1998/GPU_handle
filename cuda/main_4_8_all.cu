@@ -3,6 +3,7 @@
 #include <iostream>
 #include <bit>
 #include <bitset>
+#include <chrono>
 #include "../Data/Data_4_8_0.cpp"
 
 #define NBR_RIDGES 152 //first multiple of 152 larger than 708
@@ -133,7 +134,12 @@ int main() {
     bool last_one_copied = false;
     bool first_appeared;
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     for (int l = 0; l < NBR_LOOPS; l++) {
+        end = std::chrono::steady_clock::now();
+        std::clog << l << " Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[ms]" << std::endl;
+        begin = std::chrono::steady_clock::now();
         for (auto &dataX0 : listX0) {
             for (unsigned int &dataPrecalc : dataX0.precalc){
                 dataPrecalc=0u;
