@@ -54,7 +54,7 @@ int main() {
     for (int i = 1; i < NBR_GROUPS; i++) {
         int position = 0;
         for (int j = 0; j < (1ul << (list_groups[i])); j++) {
-            if (__popcount(j) <= 2) {
+            if (__builtin_popcount(j) <= 2) {
                 unsigned long jl = j;
                 list_elementary[i - 1][position] = (jl << list_shifts[i]);
                 position += 1;
@@ -95,7 +95,7 @@ int main() {
         }
         for (auto &dataX0: listX0) {
             for (int i = 0; i < NBR_FACETS; i++) {
-                if ((__popcount(dataX0.X0 & A[i])) & 1u) {
+                if ((__builtin_popcount(dataX0.X0 & A[i])) & 1u) {
                     dataX0.precalc[i / DIVISOR] |= (1u << (i % DIVISOR));
                 }
             }
@@ -110,7 +110,7 @@ int main() {
                 count = 0;
                 skip = false;
                 for (int j = 0; j < NBR_FACETS; j++) {
-                    Ax[j] = __popcount(a[j] & X1_val) & 1;
+                    Ax[j] = __builtin_popcount(a[j] & X1_val) & 1;
                     if (Ax[j]) count++;
                     if (count > MAX_NBR_FACETS) {
                         skip = true;
@@ -135,7 +135,7 @@ int main() {
                 cout << '[';
                 first_appeared = false;
                 for (int j = 0; j < NBR_FACETS; j++) {
-                    if (__popcount((X0_val | (unsigned long) (X1_val ^ (1u << 31))) & A[j]) & 1ul) {
+                    if (__builtin_popcount((X0_val | (unsigned long) (X1_val ^ (1u << 31))) & A[j]) & 1ul) {
                         if (first_appeared) cout << ',';
                         first_appeared = true;
                         cout << F[j];

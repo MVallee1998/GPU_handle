@@ -1,4 +1,5 @@
 #include <cuda.h>
+#include <cstdio>
 #include <iostream>
 #include <bit>
 #include <bitset>
@@ -10,7 +11,7 @@
 #define BLOCK_SIZE 76
 #define SUB_BLOCK 4
 #define DIVISOR (32/SUB_BLOCK)
-#define CUDA_CORES 3584
+#define CUDA_CORES 3328
 using namespace std;
 
 struct StructX0 {
@@ -110,8 +111,8 @@ int main() {
     }
     for (int i = 1; i < NBR_GROUPS; i++) {
         int position = 0;
-        for (int j = 0; j < (1ul << (list_groups[i])); j++) {
-            if (__popcount(j) <= 2) {
+        for (unsigned int j = 0; j < (1ul << (list_groups[i])); j++) {
+            if (popcount(j) <= 2) {
                 unsigned long jl = j;
                 list_elementary[i - 1][position] = (jl << list_shifts[i]);
                 position += 1;
@@ -131,14 +132,15 @@ int main() {
     }
     bool last_one_copied = false;
     bool first_appeared;
+
     for (int l = 0; l < NBR_LOOPS; l++) {
-        for (auto & dataX0 : listX0) {
-            for (unsigned int &dataPrecalc:dataX0.precalc){
-                dataPrecalc=0;
+        for (auto &dataX0 : listX0) {
+            for (unsigned int &dataPrecalc : dataX0.precalc){
+                dataPrecalc=0u;
             }
         }
         last_one_copied = false;
-        for (auto & dataX0 : listX0) {
+        for (auto &dataX0 : listX0) {
             X0 = (1ul << 63);
             for (int i = 0; i < sizeVectX0; i++) {
                 X0 |= list_elementary[i][vectX0[i]];
@@ -146,17 +148,17 @@ int main() {
             dataX0.X0 = X0;
             increment_vect(vectX0, list_ref, 0, sizeVectX0);
         }
-        for (auto & dataX0 : listX0) {
+        for (auto &dataX0 : listX0) {
             for (int i = 0; i < BLOCK_SIZE; i++) {
                 for (int k = 0; k < SUB_BLOCK; k++) {
-                    if ((__popcount(dataX0.X0 & A[i * SUB_BLOCK + k])) & 1u) {
+                    if ((popcount(dataX0.X0 & A[i * SUB_BLOCK + k])) & 1u) {
                         dataX0.precalc[i / DIVISOR] |= (1u << (SUB_BLOCK * (i % DIVISOR) + k));
                     }
                 }
             }
         }
         kernel<<<NBR_X0, BLOCK_SIZE>>>(listX0);
-        cudaError_t cudaerr = cudaDeviceSynchronize();
+        cudaError_t cudaerr = cudaDeviceSynchronize();        
         if (cudaerr != cudaSuccess)
             printf("kernel launch failed with error \"%s\".\n",
                    cudaGetErrorString(cudaerr));
@@ -164,8 +166,8 @@ int main() {
             for (int i = 0; i < nOut; i++) {
                 first_appeared = false;
                 cout << '[';
-                for (int j = 0; j < NBR_FACETS; j++) {
-                    if (__popcount(out[i] & A[j]) & 1ul) {
+                for (unsigned int j = 0; j < NBR_FACETS; j++) {
+                    if (popcount(out[i] & A[j]) & 1ul) {
                         if (first_appeared) cout << ',';
                         first_appeared = true;
                         cout << F[j];
@@ -176,14 +178,13 @@ int main() {
             nOut = 0;
             last_one_copied = true;
         }
-
     }
     if (not last_one_copied) {
         for (int i = 0; i < nOut; i++) {
             cout << '[';
             first_appeared = false;
             for (int j = 0; j < NBR_FACETS; j++) {
-                if (__popcount(out[i] & A[j]) & 1ul) {
+                if (popcount(out[i] & A[j]) & 1ul) {
                     if (first_appeared) cout << ',';
                     first_appeared = true;
                     cout << F[j];
