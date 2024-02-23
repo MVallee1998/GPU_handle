@@ -18,7 +18,7 @@ We strongly advise the interested reader to use Linux for compiling and running 
 ### Compiling and running the CUDA algorithm
 An example is better than a thousand words, if launched from the root folder of the project, the following command
 ```bash
-/usr/local/cuda-12.0/bin/nvcc ./cuda/main_8_12.cu -arch=sm_86 -o ./build/GPU_exec_8_12
+nvcc cuda/main_4_8_all.cu -std c++20 -arch=sm_86 -o GPU_4_8_all
 ```
 will compile the cuda script ``main_8_12.cu`` into the executable ``GPU_exec_8_12``,
 where:
