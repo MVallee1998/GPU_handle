@@ -113,7 +113,7 @@ int main() {
     for (int i = 1; i < NBR_GROUPS; i++) {
         int position = 0;
         for (unsigned int j = 0; j < (1ul << (list_groups[i])); j++) {
-            if (popcount(j) <= 2) {
+            if (__buitin_popcount(j) <= 2) {
                 unsigned long jl = j;
                 list_elementary[i - 1][position] = (jl << list_shifts[i]);
                 position += 1;
@@ -156,7 +156,7 @@ int main() {
         for (auto &dataX0 : listX0) {
             for (int i = 0; i < BLOCK_SIZE; i++) {
                 for (int k = 0; k < SUB_BLOCK; k++) {
-                    if ((popcount(dataX0.X0 & A[i * SUB_BLOCK + k])) & 1u) {
+                    if ((__buitin_popcount(dataX0.X0 & A[i * SUB_BLOCK + k])) & 1u) {
                         dataX0.precalc[i / DIVISOR] |= (1u << (SUB_BLOCK * (i % DIVISOR) + k));
                     }
                 }
@@ -172,7 +172,7 @@ int main() {
                 first_appeared = false;
                 cout << '[';
                 for (unsigned int j = 0; j < NBR_FACETS; j++) {
-                    if (popcount(out[i] & A[j]) & 1ul) {
+                    if (__buitin_popcount(out[i] & A[j]) & 1ul) {
                         if (first_appeared) cout << ',';
                         first_appeared = true;
                         cout << F[j];
@@ -189,7 +189,7 @@ int main() {
             cout << '[';
             first_appeared = false;
             for (int j = 0; j < NBR_FACETS; j++) {
-                if (popcount(out[i] & A[j]) & 1ul) {
+                if (__buitin_popcount(out[i] & A[j]) & 1ul) {
                     if (first_appeared) cout << ',';
                     first_appeared = true;
                     cout << F[j];
