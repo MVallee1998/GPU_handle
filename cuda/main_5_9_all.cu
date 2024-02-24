@@ -17,7 +17,7 @@ using namespace std;
 
 struct StructX0 {
     unsigned long X0 = 0ul;
-    unsigned int precalc[20] = {0u};
+    unsigned int precalc[4] = {0u};
 };
 
 const int nbrX0 = NBR_X0;
@@ -167,7 +167,7 @@ int main() {
         if (cudaerr != cudaSuccess)
             printf("kernel launch failed with error \"%s\".\n",
                    cudaGetErrorString(cudaerr));
-        if (nOut > (1u << 23)) {
+        if (nOut > (1u << 19)) {
             for (int i = 0; i < nOut; i++) {
                 first_appeared = false;
                 cout << '[';
