@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bit>
 #include <cstring>
-#include "../Data/Data_8_12_0.cpp"
+#include "../Data_test/Data_8_12_0.cpp"
 #include <string>
 #include <algorithm>
 #include <iostream>
@@ -16,7 +16,7 @@ using namespace std;
 
 struct StructX0 {
     unsigned long X0 = 0ul;
-    unsigned int precalc[14] = {0u};
+    unsigned int precalc[10] = {0u};
 };
 
 const int nbrX0 = NBR_X0;
@@ -31,7 +31,7 @@ StructX0 listX0[nbrX0];
 void increment_vect(unsigned int vect[], const unsigned int ref[], const int starting_index, const int size) {
     vect[0] = (vect[0] + 1) % ref[starting_index];
     int k = 0;
-    while (vect[k] == 0 and k < size - 1) {
+    while ((vect[k] == 0) & (k < size - 1)) {
         k += 1;
         vect[k] = (vect[k] + 1) % ref[starting_index + k];
     }
